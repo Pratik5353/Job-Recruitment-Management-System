@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Profile — JobHub{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-3xl px-5 py-12"><div class="glass-card"><p class="eyebrow">Account</p><h1 class="section-title">Your profile</h1><form method="post" class="mt-8 grid gap-5 md:grid-cols-2">{% csrf_token %}{% for field in form %}<div><label class="label">{{ field.label }}</label>{{ field }}</div>{% endfor %}<div class="md:col-span-2"><button class="btn-primary">Save changes</button></div></form></div></section>
+{% endblock %}

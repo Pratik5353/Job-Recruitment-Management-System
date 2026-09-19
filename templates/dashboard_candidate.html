@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Candidate Dashboard — JobHub{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-7xl px-5 py-12"><div class="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p class="eyebrow">Candidate workspace</p><h1 class="section-title">Good to see you, {{ user.first_name|default:user.username }}.</h1><p class="mt-2 text-slate-400">Track your applications and upcoming interviews.</p></div><div class="flex gap-3"><a class="btn-secondary" href="{% url 'resume_upload' %}">Upload resume</a><a class="btn-primary" href="{% url 'job_list' %}">Find jobs</a></div></div>
+<div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{% for key,value in stats.items %}<div class="stat-card"><p>{{ key|title }}</p><strong>{{ value }}</strong></div>{% endfor %}</div>
+<div class="glass-card mt-8"><div class="flex justify-between"><h2 class="text-xl font-bold">Recent applications</h2><a class="text-cyan-300" href="{% url 'application_list' %}">View all</a></div><div class="mt-5 overflow-x-auto"><table class="data-table"><thead><tr><th>Role</th><th>Company</th><th>Status</th><th>Applied</th></tr></thead><tbody>{% for a in applications %}<tr><td>{{ a.job.title }}</td><td>{{ a.job.company }}</td><td><span class="status">{{ a.get_status_display }}</span></td><td>{{ a.created_at|date:"d M Y" }}</td></tr>{% empty %}<tr><td colspan="4">No applications yet.</td></tr>{% endfor %}</tbody></table></div></div></section>
+{% endblock %}

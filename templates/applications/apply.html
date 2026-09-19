@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Apply — {{ job.title }}{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-3xl px-5 py-12"><div class="glass-card"><p class="eyebrow">Application</p><h1 class="section-title">Apply to {{ job.title }}</h1><p class="mt-2 text-slate-400">{{ job.company }} · {{ job.location }}</p><form method="post" class="mt-8 space-y-5">{% csrf_token %}{% for field in form %}<div><label class="label">{{ field.label }}</label>{{ field }}</div>{% endfor %}<div class="flex gap-3"><a class="btn-secondary" href="{% url 'job_detail' job.pk %}">Cancel</a><button class="btn-primary">Submit application</button></div></form></div></section>
+{% endblock %}

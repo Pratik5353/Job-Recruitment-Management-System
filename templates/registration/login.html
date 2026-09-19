@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Login — JobHub{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-md px-5 py-16"><div class="glass-card"><p class="eyebrow">Welcome back</p><h1 class="section-title">Sign in</h1><form method="post" class="mt-8 space-y-5">{% csrf_token %}{% if form.errors %}<div class="error-box">Invalid username or password.</div>{% endif %}{% for field in form %}<div><label class="label">{{ field.label }}</label>{{ field }}</div>{% endfor %}<button class="btn-primary w-full">Sign in</button></form><p class="mt-6 text-center text-sm text-slate-400">New here? <a class="text-cyan-300" href="{% url 'register' %}">Create an account</a></p></div></section>
+{% endblock %}

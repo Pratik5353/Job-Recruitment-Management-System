@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}My Resumes — JobHub{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-4xl px-5 py-12"><div class="flex items-end justify-between"><div><p class="eyebrow">Documents</p><h1 class="section-title">My resumes</h1></div><a class="btn-primary" href="{% url 'resume_upload' %}">Upload resume</a></div><div class="mt-8 space-y-4">{% for r in resumes %}<div class="glass-card flex items-center justify-between gap-5"><div><h2 class="font-bold">{{ r.title }}</h2><p class="text-sm text-slate-400">{{ r.uploaded_at|date:"d M Y, H:i" }} · {% if r.is_primary %}Primary{% else %}Secondary{% endif %}</p></div><a class="text-cyan-300" href="{{ r.file.url }}" target="_blank">Open →</a></div>{% empty %}<div class="glass-card">No resumes uploaded.</div>{% endfor %}</div></section>
+{% endblock %}

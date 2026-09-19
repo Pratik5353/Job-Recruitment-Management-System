@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{box-sizing:border-box} body{font-family:Inter,system-ui,sans-serif;background:#070b14}
+.ambient{position:fixed;inset:0;pointer-events:none;opacity:.45;background:radial-gradient(circle at 15% 15%,rgba(109,93,252,.18),transparent 28%),radial-gradient(circle at 85% 20%,rgba(34,211,238,.12),transparent 25%);z-index:-1}
+.navlink{color:#94a3b8;transition:.2s}.navlink:hover{color:#fff}
+.hero{position:relative}.gradient-text{background:linear-gradient(90deg,#a78bfa,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#67e8f9}
+.section-title{margin-top:.45rem;font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-.04em}
+.glass-card{border:1px solid rgba(255,255,255,.10);background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.025));border-radius:1.5rem;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,.20);backdrop-filter:blur(16px);transition:.25s}
+.glass-card:hover{border-color:rgba(103,232,249,.28);transform:translateY(-2px)}
+.company-icon{display:grid;place-items:center;width:3.1rem;height:3.1rem;border-radius:1rem;background:linear-gradient(135deg,#7c3aed,#06b6d4);font-size:1.2rem;font-weight:900;box-shadow:0 10px 30px rgba(124,58,237,.25)}
+.company-icon.lg{width:4.2rem;height:4.2rem;font-size:1.5rem}
+.tag,.chip,.status{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:.35rem .7rem;background:rgba(255,255,255,.05);font-size:.75rem;color:#cbd5e1}
+.chip{color:#94a3b8}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:.9rem;padding:.78rem 1.05rem;background:linear-gradient(135deg,#7c3aed,#06b6d4);color:white;font-weight:800;box-shadow:0 12px 30px rgba(124,58,237,.22);transition:.2s}.btn-primary:hover{transform:translateY(-1px);filter:brightness(1.08)}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.12);border-radius:.9rem;padding:.78rem 1.05rem;background:rgba(255,255,255,.06);font-weight:700}
+.field,input,select,textarea{width:100%;border:1px solid rgba(255,255,255,.12);border-radius:.9rem;background:rgba(2,6,23,.72);padding:.8rem .9rem;color:#e2e8f0;outline:none}.field:focus,input:focus,select:focus,textarea:focus{border-color:#67e8f9;box-shadow:0 0 0 3px rgba(103,232,249,.08)}select option{background:#0f172a}
+.label{display:block;margin-bottom:.45rem;font-size:.8rem;font-weight:700;color:#cbd5e1}.error{color:#fda4af;font-size:.75rem;margin-top:.3rem}.error-box{border:1px solid rgba(251,113,133,.3);background:rgba(251,113,133,.08);padding:.8rem;border-radius:.8rem;color:#fecdd3}
+.stat-card{border:1px solid rgba(255,255,255,.09);border-radius:1.2rem;background:rgba(255,255,255,.045);padding:1.25rem}.stat-card p{color:#64748b;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800}.stat-card strong{display:block;margin-top:.35rem;font-size:1.8rem}
+.prose-custom{color:#cbd5e1;line-height:1.9}.prose-custom p{margin-bottom:1rem}
+.data-table{width:100%;border-collapse:collapse}.data-table th{text-align:left;color:#64748b;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;padding:.9rem;border-bottom:1px solid rgba(255,255,255,.08)}.data-table td{padding:1rem .9rem;border-bottom:1px solid rgba(255,255,255,.06);color:#cbd5e1}.data-table small{display:block;color:#64748b;margin-top:.25rem}
+.job-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem;border:1px solid rgba(255,255,255,.07);border-radius:1rem;background:rgba(255,255,255,.03)}.job-row:hover{border-color:rgba(103,232,249,.25)}.job-row p{font-size:.8rem;color:#64748b;margin-top:.25rem}.job-row span{font-size:.8rem;color:#67e8f9}
+.pager{display:grid;place-items:center;min-width:2.5rem;height:2.5rem;padding:0 .8rem;border-radius:.8rem;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#cbd5e1}
+.pulse-dot{width:.45rem;height:.45rem;border-radius:50%;background:#67e8f9;box-shadow:0 0 15px #67e8f9}
+code{color:#67e8f9}

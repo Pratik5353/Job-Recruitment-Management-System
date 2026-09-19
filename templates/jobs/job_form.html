@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Create Job — JobHub{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-4xl px-5 py-12"><div class="glass-card"><p class="eyebrow">Recruiter workspace</p><h1 class="section-title">Publish a new job</h1><form method="post" class="mt-8 space-y-5">{% csrf_token %}{% for field in form %}<div><label class="label">{{ field.label }}</label>{{ field }}{% if field.errors %}<p class="error">{{ field.errors|striptags }}</p>{% endif %}</div>{% endfor %}<button class="btn-primary">Publish job</button></form></div></section>
+{% endblock %}

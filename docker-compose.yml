@@ -1,0 +1,62 @@
+services:
+  web:
+    build: .
+    command: sh -c "python manage.py migrate && python manage.py seed_demo && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: "True"
+      SECRET_KEY: "docker-dev-secret"
+      ALLOWED_HOSTS: "localhost,127.0.0.1"
+      DB_ENGINE: postgresql
+      DB_NAME: jobhub
+      DB_USER: jobhub
+      DB_PASSWORD: jobhub
+      DB_HOST: db
+      DB_PORT: "5432"
+      REDIS_URL: redis://redis:6379/0
+    volumes:
+      - .:/app
+      - media_data:/app/media
+    depends_on:
+      - db
+      - redis
+
+  worker:
+    build: .
+    command: celery -A config worker -l info
+    environment:
+      DEBUG: "True"
+      SECRET_KEY: "docker-dev-secret"
+      DB_ENGINE: postgresql
+      DB_NAME: jobhub
+      DB_USER: jobhub
+      DB_PASSWORD: jobhub
+      DB_HOST: db
+      DB_PORT: "5432"
+      REDIS_URL: redis://redis:6379/0
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: jobhub
+      POSTGRES_USER: jobhub
+      POSTGRES_PASSWORD: jobhub
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
+  media_data:

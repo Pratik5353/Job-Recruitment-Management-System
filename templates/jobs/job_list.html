@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Find Jobs — JobHub{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-7xl px-5 py-12">
+  <div class="mb-10"><p class="eyebrow">Opportunities</p><h1 class="section-title">Find your next job</h1><p class="mt-2 text-slate-400">Search by skill, company, location or role.</p></div>
+  <form class="grid gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 md:grid-cols-4">
+    <input name="q" value="{{ q }}" class="field" placeholder="Python, Django, Backend..." />
+    <select name="work_type" class="field"><option value="">Work type</option><option value="remote" {% if work_type == 'remote' %}selected{% endif %}>Remote</option><option value="hybrid" {% if work_type == 'hybrid' %}selected{% endif %}>Hybrid</option><option value="onsite" {% if work_type == 'onsite' %}selected{% endif %}>On-site</option></select>
+    <select name="experience" class="field"><option value="">Experience</option><option value="0-1">0–1 years</option><option value="1-3">1–3 years</option><option value="2-4">2–4 years</option><option value="3-5">3–5 years</option><option value="5+">5+ years</option></select>
+    <button class="btn-primary">Search</button>
+  </form>
+  <div class="mt-8 grid gap-5 lg:grid-cols-2">
+    {% for job in page %}
+    <a href="{% url 'job_detail' job.pk %}" class="glass-card group">
+      <div class="flex gap-4"><div class="company-icon">{{ job.company|first }}</div><div class="min-w-0 flex-1"><div class="flex justify-between gap-4"><div><h2 class="text-xl font-bold group-hover:text-cyan-300">{{ job.title }}</h2><p class="mt-1 text-slate-400">{{ job.company }}</p></div><span class="tag">{{ job.get_work_type_display }}</span></div>
+      <div class="mt-5 flex flex-wrap gap-2"><span class="chip">{{ job.experience }}</span><span class="chip">{{ job.location }}</span><span class="chip">{{ job.get_employment_type_display }}</span></div>
+      <p class="mt-5 line-clamp-2 text-sm leading-6 text-slate-300">{{ job.description }}</p>
+      <div class="mt-6 text-sm font-bold text-cyan-300">{% if job.salary_min %}₹{{ job.salary_min }} – ₹{{ job.salary_max }} / month{% else %}Salary not disclosed{% endif %}</div>
+      </div></div>
+    </a>
+    {% empty %}<div class="glass-card lg:col-span-2">No matching jobs found.</div>{% endfor %}
+  </div>
+  {% if page.paginator.num_pages > 1 %}
+  <div class="mt-10 flex justify-center gap-2">
+    {% if page.has_previous %}<a class="pager" href="?q={{ q }}&work_type={{ work_type }}&experience={{ experience }}&page={{ page.previous_page_number }}">←</a>{% endif %}
+    <span class="pager">{{ page.number }} / {{ page.paginator.num_pages }}</span>
+    {% if page.has_next %}<a class="pager" href="?q={{ q }}&work_type={{ work_type }}&experience={{ experience }}&page={{ page.next_page_number }}">→</a>{% endif %}
+  </div>{% endif %}
+</section>
+{% endblock %}

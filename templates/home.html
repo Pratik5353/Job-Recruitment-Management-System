@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}JobHub — Find your next opportunity{% endblock %}
+{% block content %}
+<section class="hero mx-auto max-w-7xl px-5 py-20 lg:py-28">
+  <div class="max-w-4xl">
+    <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm text-cyan-200">
+      <span class="pulse-dot"></span> Smart hiring, beautifully organized
+    </div>
+    <h1 class="text-5xl font-black leading-tight tracking-tight md:text-7xl">Find the role where your <span class="gradient-text">skills matter.</span></h1>
+    <p class="mt-7 max-w-2xl text-lg leading-8 text-slate-300">A modern recruitment workspace for candidates and hiring teams. Search roles, manage applications, upload resumes and schedule interviews in one place.</p>
+    <form action="{% url 'job_list' %}" class="mt-9 flex max-w-3xl flex-col gap-3 rounded-3xl border border-white/10 bg-white/5 p-3 shadow-glow backdrop-blur-xl md:flex-row">
+      <input name="q" class="field flex-1" placeholder="Search Python, Django, Backend..." />
+      <select name="work_type" class="field md:w-44">
+        <option value="">All work types</option><option value="remote">Remote</option><option value="hybrid">Hybrid</option><option value="onsite">On-site</option>
+      </select>
+      <button class="btn-primary">Search Jobs</button>
+    </form>
+    <div class="mt-8 flex flex-wrap gap-3 text-sm text-slate-400">
+      <span class="chip">Python</span><span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Remote</span><span class="chip">Backend</span>
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-7xl px-5 pb-16">
+  <div class="mb-8 flex items-end justify-between"><div><p class="eyebrow">Latest opportunities</p><h2 class="section-title">Fresh roles</h2></div><a href="{% url 'job_list' %}" class="text-cyan-300 hover:text-white">View all →</a></div>
+  <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+    {% for job in jobs %}
+      <a href="{% url 'job_detail' job.pk %}" class="glass-card group">
+        <div class="flex items-start justify-between"><div class="company-icon">{{ job.company|first }}</div><span class="tag">{{ job.get_work_type_display }}</span></div>
+        <h3 class="mt-6 text-xl font-bold group-hover:text-cyan-300">{{ job.title }}</h3>
+        <p class="mt-2 text-slate-400">{{ job.company }} · {{ job.location }}</p>
+        <div class="mt-6 flex flex-wrap gap-2">{% for skill in job.skills|cut:","|slice:":100"|add:"" %}{% endfor %}<span class="chip">{{ job.experience }}</span><span class="chip">{{ job.get_employment_type_display }}</span></div>
+        <div class="mt-7 flex items-center justify-between border-t border-white/10 pt-5 text-sm"><span class="text-slate-400">{% if job.salary_min %}₹{{ job.salary_min|floatformat:0 }} – ₹{{ job.salary_max|floatformat:0 }} / mo{% else %}Salary undisclosed{% endif %}</span><span class="font-bold text-cyan-300">View →</span></div>
+      </a>
+    {% empty %}
+      <div class="glass-card md:col-span-3">No jobs yet. Run <code>python manage.py seed_demo</code>.</div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
